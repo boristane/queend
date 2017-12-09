@@ -1,0 +1,25 @@
+{
+  "name": "queend",
+  "version": "1.0.0",
+  "description": "A web-app to visualise real time wind data in England, Scotland and Wales.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jslint"
+  },
+  "keywords": [
+    "wind",
+    "map",
+    "England",
+    "Scotland",
+    "Wales"
+  ],
+  "author": "Boris Tane",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.13.0",
+    "geodesy": "^1.1.2"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
+  }
+}
