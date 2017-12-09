@@ -18,6 +18,19 @@ function write(s, x, y){
     ctx.fillText(s, x, y);
 }
 
+function drawLine(x0, y0, wx, wy, scale, color){
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    y0 = canvas.height - y0;
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    wx = scale*wx + x0;
+    wy = scale*wy + y0;
+    ctx.lineTo(wx, wy);
+    ctx.strokeStyle = color;
+    ctx.stroke();
+}
+
 function makeBase(width, height){
     var canvas = document.getElementById("canvas");
     canvas.width = width;
