@@ -1,0 +1,95 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: rgb(255, 255, 255);
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.page-header{
+    border-bottom: solid;
+    border-color: rgb(133, 133, 133);
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#author{
+    padding-right: 10px;
+    float: right;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+.date-container {
+    width: 40%;
+    height: 200px;
+    float: left;
+}
+
+.canvas-container {
+    margin-left: 45%;
+}
+
+#canvas{
+    margin: auto;
+}
+
+#legend canvas{
+    border: solid;
+    border-color: rgb(133, 133, 133);
+    border-width: thin;
+    margin-right: 10px;
+}
+
+.description{
+    border-top: solid;
+    border-color: rgb(133, 133, 133);
+    border-width: thin;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-top: 3px;
+    color: rgb(133, 133, 133);
+}
+
+.small-container {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+.controls {
+    width: 50%;
+    height: 200px;
+    float: left;
+}
+
+#legend{
+    margin-left: 60%;
+}
+
+.button-container{
+    text-align: center;
+}
+
+form a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+form a:hover{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(121, 166, 250);
+}

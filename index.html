@@ -4,18 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <title>qweend</title>
     <script src="plugins/geodesy-master/vector3d.js"></script>
     <script src="plugins/geodesy-master/latlon-ellipsoidal.js"></script>
     <script src="plugins/geodesy-master/osgridref.js"></script>
     <script src="plugins/geodesy-master/dms.js"></script>
     <script src="plugins/kriging.js"></script>
+    <script src="plugins/jquery-3.2.1.js"></script>
+    <script src="plugins/bootstrap.js"></script>
 </head>
-<body>
+<body> 
     
-    <canvas id="canvas" width="1654" height="2423"></canvas>
+    <div class="page-header">
+        <h1>queend<small> a wind map of England, Scotland and Wales</small></h1>
+        <span id="author">by <a target="_blank" href="https://www.linkedin.com/in/boristane/">Boris Tane</a></span>
+    </div>
+    
+    <section class="container">
+        <div class="date-container">
+            <h2 id="date">Date</h2>
+            <h2 id="time">Time</h2>
+            <p>
+                Time might be subjected to data availability.
+            </p>
+            <div class="small-container">
+                <div class="controls">
+                    
+                    
+                    <form download="Canvas.png">
+                        <legend>Controls</legend>
+                    
+                        <div class="form-group">  
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="" id="metStations">
+                                    Met Stations
+                                </label>
+                                <br/>
+                                <br/>
+                                <label>
+                                    <input type="checkbox" value="" id="majorCities">
+                                    Major Cities
+                                </label>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="button-container">
+                            <button type="submit" class="btn btn-primary"><a id="dl" download="canvas.png">Download Image</a></button>
+                        </div>
+                    </form>
+                    
+                    
+                </div>
+                <div id="legend">
+                    <br/>
+                    <canvas id="legend1" width=80 height=20></canvas> &lt; 4 m/s<br><br>
+                    <canvas id="legend2" width=80 height=20></canvas> &gt; 4 m/s<br><br>
+                    <canvas id="legend3" width=80 height=20></canvas> &gt; 6 m/s<br><br>
+                    <canvas id="legend4" width=80 height=20></canvas> &gt; 8 m/s<br><br>
+                    <canvas id="legend5" width=80 height=20></canvas> &gt; 10 m/s<br><br>
+                </div>
+            </div>
+
+            <div class="description">
+                <p>
+                    Wind on earth is the movement of air on a large scale. In metrorology, we often refer to wind according to its strenght and direction.<br/><br/>
+                    The question of wind comfort and safety in urban areas is of major importance in the UK, where strong regulations exist. To answer this question, <a target="_blank" href="https://en.wikipedia.org/wiki/Wind_engineering">wind engineers</a> make use of <a target="_blank" href="https://en.wikipedia.org/wiki/Computational_fluid_dynamics">CFD</a> or <a href="https://en.wikipedia.org/wiki/Wind_tunnel">wind tunnel testing</a> to quantify the impact of buildings on pedestrian comfort and safety.<br/><br/>
+                    These studies are based on statistical wind data available at the closest weather stations to the urban area of interest.<br/><br/>
+                    It is now clear that a deep understanding of wind climate across the UK would provide better toold to wind microclimate consultants and better inform their clients.<br/><br/><br/>
+                    If the map is missing or seems slow, we recommend the latest <a target="_blank" href="https://www.google.com/chrome/index.html">Chrome browser</a>.<br/><br/> 
+                    Data source: <a target="_blank" href="https://www.metoffice.gov.uk/datapoint">
+                        <img src="assets/img/met-office.jpg" alt="Met office logo" height="42" width="42">
+                    </a>
+                </p>
+            </div>
+
+            
+        </div>
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>          
+        </div>
+
+        
+        
+    </section>
+    
     <script src="assets/js/ajax.js"></script>
     <script src="assets/js/draw.js"></script>
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/controls.js"></script>
 </body>
 </html>

@@ -6,10 +6,12 @@ var wx = [];
 var wy = [];
 var x = [];
 var y = [];
+var interpGrid = [];
 var data;
 
 // Get the latest available time wind observations are available
 ajaxGet(allAvailableObsURL, function(response){
+    
     data = JSON.parse(response);
     var obsTimes = data.Resource.TimeSteps.TS;
     latestObsTime = obsTimes[obsTimes.length-1];
@@ -23,7 +25,7 @@ ajaxGet(allAvailableObsURL, function(response){
             var locationDetails = data.SiteRep.DV.Location[i];
             var windData = data.SiteRep.DV.Location[i].Period.Rep;
             var station = {}; 
-            station.windSpeed = parseFloat(windData.S, 10);
+            station.windSpeed = mph2ms(parseFloat(windData.S, 10));
             if(isNaN(station.windSpeed)){
                 continue;
             }
@@ -31,6 +33,7 @@ ajaxGet(allAvailableObsURL, function(response){
             station.name = locationDetails.name.toLowerCase();
             station.lon = parseFloat(locationDetails.lon, 10);
             station.lat = parseFloat(locationDetails.lat, 10);
+            station.country = locationDetails.country.toLowerCase();
             station.windDirection = parseWindDirection(windData.D);
             var cartWindSpeed = pol2car(station.windSpeed, station.windDirection);
             station.wx = cartWindSpeed.wx;
@@ -41,20 +44,18 @@ ajaxGet(allAvailableObsURL, function(response){
             var grid = OsGridRef.latLonToOsGrid(point);
             station.x = grid.easting;
             station.y = grid.northing;
-            
-            var coord = bngToPixels(station.x, station.y);
-            drawCoordinates(coord.x, coord.y);
-            write(station.name, coord.x+5, coord.y+5);
-            drawLine(coord.x, coord.y, station.wx, station.wy, 1, "blue");
 
             stations.push(station);
             x.push(station.x);
             y.push(station.y);
             wx.push(station.wx);
             wy.push(station.wy);
+            if(station.country === "england" || station.country === "scotland" || station.country === "wales"){
+                var coord = bngToPixels(station.x, station.y);
+            }
         }
         
-        var interpGrid = [];
+        
         const MAX_EASTING = 669253;
         const MAX_NORTHING = 984594;
 
@@ -72,10 +73,14 @@ ajaxGet(allAvailableObsURL, function(response){
                 interpPoint.wy = kriging.predict(i,j,fitModelWy);
                 interpGrid.push(interpPoint);
                 var interpCoord = bngToPixels(i, j);
-                drawLine(interpCoord.x, interpCoord.y, interpPoint.wx, interpPoint.wy, 1, "red");
+                var pol = car2pot(interpPoint.wx, interpPoint.wy);
+                var windColor = setWindColor(pol.r);
+                var scale = 4;
+                drawLine(canvas, interpCoord.x, interpCoord.y, interpPoint.wx, interpPoint.wy, scale, "rgba("+ windColor + ", 1.0)");
             }
         }
-
+        makeBase(imgWidth/3, imgHeight/3);
+        displayDate(latestObsTime);
     });
 });
 
@@ -143,6 +148,37 @@ function pol2car(r, theta){
     return cart;
 }
 
+function car2pot(xx,yy){
+    var pol = {};
+    pol.r = Math.sqrt(Math.pow(xx,2) + Math.pow(yy,2));
+    pol.theta = Math.atan2(xx,yy);
+    return pol;
+}
+
 function deg2rad(deg){
     return deg*Math.PI/180;
+}
+
+function setWindColor(r){
+    var rgbCode = "";
+    if(r < 4){
+        rgbCode = "0, 204, 0";
+    }
+    if(r > 4){
+        rgbCode = "153, 204, 0";
+    }
+    if(r > 6){
+        rgbCode = "255, 255, 102";
+    }
+    if(r > 8){
+        rgbCode = "255, 102, 0";
+    }
+    if(r > 10){
+        rgbCode = "255, 0, 0";
+    }
+    return rgbCode;
+}
+
+function mph2ms(mph){
+    return mph*0.44704;
 }
