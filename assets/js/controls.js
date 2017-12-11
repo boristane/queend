@@ -147,9 +147,9 @@ function dlCanvas() {
 
     var dlElt = document.getElementById("dl");
     dlElt.setAttribute("download", latestObsTime+".png");
-    var dateFont = "15px Helvetica";
+    var dateFont = (bodyWidth/45).toString()+ "px Helvetica";
     var textColor = "rgb(133, 133, 133)";
-    write(latestObsTime, 380, 750, dateFont, textColor);
+    write(latestObsTime, bodyWidth*(1-1/4), bodyHeight*(1-1/15), dateFont, textColor);
 
     var dt = canvas.toDataURL('image/png');
     /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
