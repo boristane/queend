@@ -132,5 +132,10 @@ function drawLegend(){
 
 var imgWidth = 1654;
 var imgHeight = 2423;
-initialiseCanvas(imgWidth/3, imgHeight/3);
+var aspectRatio = imgHeight/imgWidth;
+var body = document.querySelector("body");
+var bodyWidth = body.clientWidth/2;
+var bodyHeight = bodyWidth*aspectRatio;
+//initialiseCanvas(imgWidth/3, imgHeight/3);
+initialiseCanvas(bodyWidth, bodyHeight);
 drawLegend();

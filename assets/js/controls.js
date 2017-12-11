@@ -96,7 +96,7 @@ metStations.addEventListener("change",function(){
             var color = "red";
             var scale = 2;
             drawCoordinates(coord.x, coord.y, scale, color);
-            makeBase(imgWidth/3, imgHeight/3);
+            makeBase(bodyWidth, bodyHeight);
         }
     }
 
@@ -130,7 +130,7 @@ majorCities.addEventListener("change",function(){
 
 
 function drawResult(){
-    initialiseCanvas(imgWidth/3, imgHeight/3);
+    initialiseCanvas(bodyWidth, bodyHeight);
     for(var j=0; j<interpGrid.length; j++){
         var interpPoint = interpGrid[j];
         var interpCoord = bngToPixels(interpPoint.x, interpPoint.y);
@@ -139,7 +139,7 @@ function drawResult(){
         var scale = 4;
         drawLine(canvas, interpCoord.x, interpCoord.y, interpPoint.wx, interpPoint.wy, scale, "rgba("+ windColor + ", 1.0)");
     }
-    makeBase(imgWidth/3, imgHeight/3);
+    makeBase(bodyWidth, bodyHeight);
 }
 
 // Source: https://stackoverflow.com/questions/12796513/html5-canvas-to-png-file
@@ -159,7 +159,7 @@ function dlCanvas() {
     dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
   
     this.href = dt;
-    makeBase(imgWidth/3, imgHeight/3);
+    makeBase(bodyWidth, bodyHeight);
 }
 
 document.getElementById("dl").addEventListener("click", dlCanvas, false);

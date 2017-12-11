@@ -23,14 +23,14 @@
     </div>
     
     <section class="container">
-        <div class="date-container">
+        <div class="date-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h2 id="date">Date</h2>
             <h2 id="time">Time</h2>
             <p>
                 Time might be subjected to data availability.
             </p>
             <div class="small-container">
-                <div class="controls">
+                <div class="controls col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     
                     
                     <form download="Canvas.png">
@@ -59,7 +59,7 @@
                     
                     
                 </div>
-                <div id="legend">
+                <div id="legend" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <br/>
                     <canvas id="legend1" width=80 height=20></canvas> &lt; 4 m/s<br><br>
                     <canvas id="legend2" width=80 height=20></canvas> &gt; 4 m/s<br><br>
@@ -69,29 +69,29 @@
                 </div>
             </div>
 
-            <div class="description">
+            <div class="description col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p>
                     Wind on earth is the movement of air on a large scale. In metrorology, we often refer to wind according to its strenght and direction.<br/><br/>
                     The question of wind comfort and safety in urban areas is of major importance in the UK, where strong regulations exist. To answer this question, <a target="_blank" href="https://en.wikipedia.org/wiki/Wind_engineering">wind engineers</a> make use of <a target="_blank" href="https://en.wikipedia.org/wiki/Computational_fluid_dynamics">CFD</a> or <a href="https://en.wikipedia.org/wiki/Wind_tunnel">wind tunnel testing</a> to quantify the impact of buildings on pedestrian comfort and safety.<br/><br/>
                     These studies are based on statistical wind data available at the closest weather stations to the urban area of interest.<br/><br/>
-                    It is now clear that a deep understanding of wind climate across the UK would provide better toold to wind microclimate consultants and better inform their clients.<br/><br/><br/>
+                    It is now clear that a deep understanding of wind climate across the UK would provide better tools to wind microclimate consultants and help them better inform their clients.<br/><br/><br/>
                     If the map is missing or seems slow, we recommend the latest <a target="_blank" href="https://www.google.com/chrome/index.html">Chrome browser</a>.<br/><br/> 
                     Data source: <a target="_blank" href="https://www.metoffice.gov.uk/datapoint">
                         <img src="assets/img/met-office.jpg" alt="Met office logo" height="42" width="42">
                     </a>
                 </p>
-            </div>
-
-            
+            </div> 
         </div>
         <div class="canvas-container">
-            <canvas id="canvas"></canvas>          
+            <canvas id="canvas" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></canvas>          
         </div>
-
         
         
     </section>
     
+
+       
+
     <script src="assets/js/ajax.js"></script>
     <script src="assets/js/draw.js"></script>
     <script src="assets/js/index.js"></script>

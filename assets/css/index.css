@@ -1,8 +1,8 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: rgb(255, 255, 255);
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .page-header{
@@ -25,18 +25,18 @@ body {
 }
 
 .date-container {
-    width: 40%;
-    height: 200px;
     float: left;
 }
 
 .canvas-container {
-    margin-left: 45%;
+    text-align: center;
 }
 
 #canvas{
     margin: auto;
 }
+
+
 
 #legend canvas{
     border: solid;
@@ -62,13 +62,7 @@ body {
 }
 
 .controls {
-    width: 50%;
-    height: 200px;
     float: left;
-}
-
-#legend{
-    margin-left: 60%;
 }
 
 .button-container{
@@ -89,7 +83,15 @@ a{
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
+
 a:hover{
     text-decoration: none;
     color: rgb(121, 166, 250);
+}
+
+@media screen and (min-width: 1561px) {
+    body {
+        margin-left: 210px;
+        margin-right: 210px;
+    }
 }

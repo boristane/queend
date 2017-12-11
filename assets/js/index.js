@@ -77,9 +77,10 @@ ajaxGet(allAvailableObsURL, function(response){
                 var windColor = setWindColor(pol.r);
                 var scale = 4;
                 drawLine(canvas, interpCoord.x, interpCoord.y, interpPoint.wx, interpPoint.wy, scale, "rgba("+ windColor + ", 1.0)");
+                drawCoordinates(interpCoord.x, interpCoord.y, 1, "rgba("+ windColor + ", 1.0)");
             }
         }
-        makeBase(imgWidth/3, imgHeight/3);
+        makeBase(bodyWidth, bodyHeight);
         displayDate(latestObsTime);
     });
 });
