@@ -96,7 +96,7 @@ metStations.addEventListener("change",function(){
             var color = "red";
             var scale = 2;
             drawCoordinates(coord.x, coord.y, scale, color);
-            makeBase(bodyWidth, bodyHeight);
+            //makeBase(bodyWidth, bodyHeight);
         }
     }
 
@@ -141,6 +141,33 @@ function drawResult(){
     }
     makeBase(bodyWidth, bodyHeight);
 }
+
+var buttonUp = document.getElementById("arrow-up");
+var buttonDown = document.getElementById("arrow-down");
+
+buttonUp.addEventListener("click", function(){
+    obsTimeCount++;
+    if(obsTimeCount >= obsTimes.length){
+        obsTimeCount = obsTimes.length-1;
+        return;
+    }
+    makeWindMap(obsTimes[obsTimeCount]);
+    displayDate(obsTimes[obsTimeCount]);
+    metStations.checked = false;
+    majorCities.checked = false;
+});
+
+buttonDown.addEventListener("click", function(){
+    obsTimeCount--;
+    if(obsTimeCount < 0){
+        obsTimeCount = 0;
+        return;
+    }
+    makeWindMap(obsTimes[obsTimeCount]);
+    displayDate(obsTimes[obsTimeCount]);
+    metStations.checked = false;
+    majorCities.checked = false;
+});
 
 // Source: https://stackoverflow.com/questions/12796513/html5-canvas-to-png-file
 function dlCanvas() {

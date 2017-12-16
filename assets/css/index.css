@@ -93,6 +93,11 @@ a{
     color: rgb(0, 0, 0);
 }
 
+a:visited {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
 a:hover{
     text-decoration: none;
     color: rgb(121, 166, 250);

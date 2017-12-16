@@ -1,22 +1,42 @@
 var metOfficeKey = "a021fe67-358e-4f43-8e67-4aa39ee59c37";
 var allAvailableObsURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/capabilities?res=hourly&key=" + metOfficeKey;
 var latestObsTime = "";
+var obsTimes = [];
+var obsTimeCount = 0;
 var stations = [];
 var wx = [];
 var wy = [];
 var x = [];
 var y = [];
 var interpGrid = [];
-var data;
+var data = {};
 
 // Get the latest available time wind observations are available
 ajaxGet(allAvailableObsURL, function(response){
-    
     data = JSON.parse(response);
-    var obsTimes = data.Resource.TimeSteps.TS;
-    latestObsTime = obsTimes[obsTimes.length-1];
-    var obsURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/all?res=hourly&time=" + latestObsTime + "&key=" + metOfficeKey;
-    console.log(latestObsTime);
+    obsTimes = data.Resource.TimeSteps.TS;
+    obsTimeCount = obsTimes.length-1;
+    latestObsTime = obsTimes[obsTimeCount];
+    makeWindMap(latestObsTime);
+    displayDate(latestObsTime);
+});
+
+
+function initialise(){
+    initialiseCanvas(bodyWidth, bodyHeight);
+    stations = [];
+    wx = [];
+    wy = [];
+    x = [];
+    y = [];
+    interpGrid = [];
+    data = {};
+}
+function makeWindMap(obsTime){
+
+    initialise();
+    write("Loading...", bodyWidth/2, bodyHeight/2, "20px Helvetica", "black");
+    var obsURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/all?res=hourly&time=" + obsTime + "&key=" + metOfficeKey;
     // Get the current wind data at each station
     ajaxGet(obsURL, function(response2){
         data = JSON.parse(response2);
@@ -67,6 +87,7 @@ ajaxGet(allAvailableObsURL, function(response){
         var alpha = 100;
         var fitModelWx = kriging.train(wx, x, y, model, sigma2, alpha);
         var fitModelWy = kriging.train(wy, x, y, model, sigma2, alpha);
+        initialiseCanvas(bodyWidth, bodyHeight);
         for(var i = 0; i<MAX_EASTING; i+=10000){
             for(var j=0; j<MAX_NORTHING; j+=10000){
                 var interpPoint = {};
@@ -84,9 +105,8 @@ ajaxGet(allAvailableObsURL, function(response){
             }
         }
         makeBase(bodyWidth, bodyHeight);
-        displayDate(latestObsTime);
     });
-});
+}
 
 function parseWindDirection(s){
     var windDirection = 0;
