@@ -14,9 +14,9 @@
     <script src="plugins/kriging.js"></script>
     <script src="plugins/jquery-3.2.1.js"></script>
     <script src="plugins/bootstrap.js"></script>
+    <script src="plugins/fontawesome-all.js"></script>
 </head>
 <body> 
-    
     <div class="page-header">
         <h1>queend<small> a wind map of England, Scotland and Wales</small></h1>
         <span id="author">by <a target="_blank" href="https://www.linkedin.com/in/boristane/">Boris Tane</a></span>
@@ -25,7 +25,19 @@
     <section class="container">
         <div class="date-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h2 id="date">Date</h2>
-            <h2 id="time">Time</h2>
+            <div class="time-and-arrows">
+                <div class="time-container">
+                    <h2 id="time">Time</h2> 
+                </div>
+                <div class="arrows-container">
+                    <div id="arrow-up">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i><br/>
+                    </div>
+                    <div id="arrow-down">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
             <p>
                 Time might be subjected to data availability.
             </p>

@@ -24,7 +24,10 @@ ajaxGet(allAvailableObsURL, function(response){
         for(var i = 0; i < nbrStation; i++){
             var locationDetails = data.SiteRep.DV.Location[i];
             var windData = data.SiteRep.DV.Location[i].Period.Rep;
-            var station = {}; 
+            var station = {};
+            if(typeof windData.S === "undefined"){
+                continue;
+            }
             station.windSpeed = mph2ms(parseFloat(windData.S, 10));
             if(isNaN(station.windSpeed)){
                 continue;

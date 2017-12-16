@@ -28,15 +28,24 @@ body {
     float: left;
 }
 
-.canvas-container {
-    text-align: center;
+.time-and-arrows{
+    padding-bottom:70px;
+}
+
+.time-container {
+    float: left;
+}
+
+.arrows-container {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    float: left;
 }
 
 #canvas{
     margin: auto;
 }
-
-
 
 #legend canvas{
     border: solid;
@@ -89,9 +98,39 @@ a:hover{
     color: rgb(121, 166, 250);
 }
 
+#arrow-up:hover{
+    color: rgb(121, 166, 250);
+    cursor: pointer;
+}
+#arrow-down:hover{
+    color: rgb(121, 166, 250);
+    cursor: pointer;
+}
+
 @media screen and (min-width: 1561px) {
     body {
         margin-left: 210px;
         margin-right: 210px;
     }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    section{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .description{
+        padding: 0px;
+    }
+
+    .date-container{
+        padding: 0px;
+    }
+
 }
