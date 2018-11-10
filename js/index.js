@@ -1,5 +1,4 @@
-const metOfficeKey = 'a021fe67-358e-4f43-8e67-4aa39ee59c37';
-const allAvailableObsURL = 'http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/capabilities?res=hourly&key=' + metOfficeKey;
+const url = 'https://local-weather-boristane.herokuapp.com/queend';
 let filename = '';
 
 const imgWidth = 1654;
@@ -7,27 +6,25 @@ const imgHeight = 2423;
 initialiseCanvas(document.getElementById('canvas'), imgWidth, imgHeight);
 
 // Get the latest available time wind observations are available
-fetch(allAvailableObsURL).
+fetch(url).
     then((res) => res.json()).
     then((data) => {
         const canvas = document.getElementById('canvas');
-        const obsTimes = data.Resource.TimeSteps.TS;
+        const obsTimes = data;
         makeWindMap(canvas, obsTimes);
-        console.log(data);
     });
 
 function makeWindMap(canvas, obsTimes){
     const obsTime = obsTimes[obsTimes.length - 1];
     filename = obsTime;
-    const obsURL = 'http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/all?res=hourly&time=' + obsTime + '&key=' + metOfficeKey;
     // Get the current wind data at each station
-    fetch(obsURL).then((res) => res.json()).
+    postData(url, {obsTime}).
         then((data) => {
             const stations = [];
-            const nbrStation = data.SiteRep.DV.Location.length;
+            const nbrStation = data.length;
             for(let i = 0; i < nbrStation; i++){
-                const locationDetails = data.SiteRep.DV.Location[i];
-                const windData = data.SiteRep.DV.Location[i].Period.Rep;
+                const locationDetails = data[i];
+                const windData = data[i].Period.Rep;
                 const station = {};
                 if (isNaN(parseFloat(windData.S, 10))) {
                     continue;
@@ -265,6 +262,23 @@ function setWindColor (r) {
 function mph2ms (mph) {
     return mph*0.44704;
 }
+
+function postData(url = '', data = {}) {
+    return fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow',
+      referrer: 'no-referrer',
+      body: JSON.stringify(data)
+    }).
+    then((response) => response.json());
+  }
 
 // Source: https://stackoverflow.com/questions/12796513/html5-canvas-to-png-file
 function dlCanvas () {
